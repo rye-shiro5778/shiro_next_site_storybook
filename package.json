@@ -1,8 +1,24 @@
 {
   "scripts": {
-    "deploy": "sh deploy.sh"
+    "deploy": "sh deploy.sh",
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "test": "node tests",
+    "start": "npx serve ."
   },
   "devDependencies": {
+    "assemblyscript": "^0.20.13",
     "gh-pages": "^4.0.0"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.20.13"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
   }
 }
